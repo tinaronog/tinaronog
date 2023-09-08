@@ -1,0 +1,82 @@
+﻿@model ComputerManager.Models.computer
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit</h2>
+
+@using ComputerManager.Models
+
+<article class="cl pd-20">
+    <form action="@Url.Action("Save")" method="post" class="form form-horizontal" id="form-member-add" style="margin-top:40px;margin-left:20px;">
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>学号：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="@Session["stuInfo"]" placeholder="@Session["stuInfo"]" readonly="readonly" id="sid" name="sid">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>计算机号：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="" placeholder="计算机号"  id="comcode" name="comcode">
+            </div>
+        </div>
+        <div class="row cl">
+            <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+                <input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+            </div>
+        </div>
+    </form>
+</article>
+
+<script type="text/javascript">
+    $(function () {
+        $('.skin-minimal input').iCheck({
+            checkboxClass: 'icheckbox-blue',
+            radioClass: 'iradio-blue',
+            increaseArea: '20%'
+        });
+
+        $("#form-member-add").validate({
+            rules: {
+                sid:{
+                    required: true,
+                },
+                comcode: {
+                    required: true,
+                },
+            },
+            onkeyup: false,
+            focusCleanup: true,
+            success: "valid",
+            submitHandler: function (form) {
+                var comcode = $("comcode").val();
+                var room = $("room").val();
+                var cstate = $("input[name='cstate']:checked").val();
+                $(form).ajaxSubmit({
+                    url: '@Url.Action("Save", "SelectComputers1")',
+                    type: 'POST',
+                    data: {
+                        comcode: comcode,
+                        sid: sid,
+                    },
+                    success: function (result) {
+                        if (result.success) {
+                            layer.msg('保存成功!',{ icon: 1, time: 1000 }, function () {
+                                window.location.href = '@Url.Action("Edit", "SelectComputers1")';
+                            });
+                        } else {
+                            layer.msg('保存失败！',{ icon: 2, time: 1000 });
+                        }
+                    },
+                    error: function () {
+                        layer.msg('请求出错', { icon: 2, time: 1000 });
+                    }
+                });
+            }
+        });
+    });
+
+</script>

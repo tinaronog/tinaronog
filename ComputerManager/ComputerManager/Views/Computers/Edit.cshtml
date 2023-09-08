@@ -1,0 +1,112 @@
+﻿@model ComputerManager.Models.computer
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using ComputerManager.Models
+
+<article class="cl pd-20">
+    <form action="@Url.Action("Save")" method="post" class="form form-horizontal" id="form-member-add" style="margin-top:40px;margin-left:20px;">
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>计算机号：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                @{
+                    if (Model == null)
+                    {
+
+
+                        <input type="text" class="input-text" value="" placeholder="计算机号" id="comcode" name="comcode">
+                    }
+                    else
+                    {
+                        <input type="text" class="input-text" value="@Model.comcode" placeholder="计算机号" readonly="readonly" id="comcode" name="comcode">
+                    }
+                }
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>计算机房号：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="" placeholder="计算机房号" id="room" name="room">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>计算机状态：</label>
+            <div class="formControls col-xs-8 col-sm-9 skin-minimal">
+                <div class="radio-box">
+                    <input name="cstate" type="radio" id="cstate-1" value="0" checked>
+                    <label for="cstate-1">启用</label>
+                </div>
+                <div class="radio-box">
+                    <input type="radio" id="cstate-2" value="1" name="cstate">
+                    <label for="cstate-2">禁用</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="row cl">
+            <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+                <input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+            </div>
+        </div>
+    </form>
+</article>
+
+<script type="text/javascript">
+    $(function () {
+        $('.skin-minimal input').iCheck({
+            checkboxClass: 'icheckbox-blue',
+            radioClass: 'iradio-blue',
+            increaseArea: '20%'
+        });
+
+        $("#form-member-add").validate({
+            rules: {
+                room: {
+                    required: true,
+                    minlength: 2,
+                    maxlength: 16
+                },
+                comcode: {
+                    required: true,
+                    minlength: 6,
+                    maxlength: 16
+                },
+                cstate: {
+                    required: true,
+                },
+            },
+            onkeyup: false,
+            focusCleanup: true,
+            success: "valid",
+            submitHandler: function (form) {
+                var comcode = $("comcode").val();
+                var room = $("room").val();
+                var cstate = $("input[name='cstate']:checked").val();
+                $(form).ajaxSubmit({
+                    url: '@Url.Action("Save","Computers")',
+                    type: 'POST',
+                    data: {
+                        comcode: comcode,
+                        room: room,
+                        cstate: cstate
+                    },
+                    success: function (result) {
+                        if (result.success) {
+                            layer.msg('保存成功!',{ icon: 1, time: 1000 }, function () {
+                                window.location.href = '@Url.Action("Edit","Computers")';
+                            });
+                        } else {
+                            layer.msg('保存失败！',{ icon: 2, time: 1000 });
+                        }
+                    },
+                    error: function () {
+                        layer.msg('请求出错', { icon: 2, time: 1000 });
+                    }
+                });
+            }
+        });
+    });
+
+</script>

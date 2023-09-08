@@ -1,0 +1,163 @@
+﻿@model ComputerManager.Models.manager
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using ComputerManager.Models
+
+<article class="cl pd-20">
+    <form action="@Url.Action("Save")" method="post" class="form form-horizontal" id="form-member-add" style="margin-top:40px;margin-left:20px;">
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>管理员号：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                @{
+                    if (Model == null)
+                    {
+
+
+                        <input type="text" class="input-text" value="" placeholder="管理员号" id="mid" name="mid">
+                    }
+                    else
+                    {
+                        <input type="text" class="input-text" value="" placeholder="管理员号" readonly="readonly" id="mid" name="mid">
+                    }
+                }
+            </div>
+        </div>
+
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>管理员姓名：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="" placeholder="管理员姓名" id="mname" name="mname">
+            </div>
+        </div>
+
+
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>管理员密码：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="" placeholder="管理员密码" id="mpass" name="mpass">
+            </div>
+        </div>
+
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>管理员权限：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="1" placeholder="管理员权限" id="power" name="power" readonly>
+            </div>
+        </div>
+
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>管理员状态：</label>
+            <div class="formControls col-xs-8 col-sm-9 skin-minimal">
+                <div class="radio-box">
+                    <input name="mstate" type="radio" id="mstate-1" value="0" checked>
+                    <label for="mstate-1">可用</label>
+                </div>
+                <div class="radio-box">
+                    <input type="radio" id="mstate-2" value="1" name="mstate">
+                    <label for="mstate-2">禁用</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>管理员性别：</label>
+            <div class="formControls col-xs-8 col-sm-9 skin-minimal">
+                <div class="radio-box">
+                    <input name="sex" type="radio" id="sex-1" value="男" checked>
+                    <label for="sex-1">男</label>
+                </div>
+                <div class="radio-box">
+                    <input type="radio" id="sex-2" value="女" name="sex">
+                    <label for="sex-2">女</label>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row cl">
+            <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+                <input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+            </div>
+        </div>
+    </form>
+</article>
+
+<script type="text/javascript">
+    $(function () {
+        $('.skin-minimal input').iCheck({
+            checkboxClass: 'icheckbox-blue',
+            radioClass: 'iradio-blue',
+            increaseArea: '20%'
+        });
+
+        $("#form-member-add").validate({
+            rules: {
+                mid: {
+                    required: true,
+                    minlength: 2,
+                    maxlength: 16
+                },
+                mname: {
+                    required: true,
+                    minlength: 2,
+                    maxlength: 16
+                },
+                mpass: {
+                    required: true,
+                    minlength: 6,
+                    maxlength: 16
+                },
+                sex: {
+                    required: true,
+                },
+                mstate: {
+                    requires:true,
+                },
+                power: {
+                    required:true,
+                },
+            },
+            onkeyup: false,
+            focusCleanup: true,
+            success: "valid",
+            submitHandler: function (form) {
+                var mid = $("mid").val();
+                var mname = $("mname").val();
+                var mstate = $("input[name='mstate']:checked").val();
+                var mpass = $("mpass").val();
+                var sex = $("input[name='sex']:checked").val();
+                var power = $("power").val();
+
+                $(form).ajaxSubmit({
+                    url: '@Url.Action("Save", "Managers")',
+                    type: 'POST',
+                    data: {
+                        mid=mid,
+                        mname: mname,
+                        mstate: mstate,
+                        mpass: mpass,
+                        sex: sex,
+                        power: power
+                    },
+                    success: function (result) {
+                        if (result.success) {
+                            layer.msg('保存成功!',{ icon: 1, time: 1000 }, function () {
+                                window.location.href = '@Url.Action("Edit","Managers")';
+                            });
+                        } else {
+                            layer.msg('保存失败！',{ icon: 2, time: 1000 });
+                        }
+                    },
+                    error: function () {
+                        layer.msg('请求出错', { icon: 2, time: 1000 });
+                    }
+                });
+            }
+        });
+    });
+
+</script>

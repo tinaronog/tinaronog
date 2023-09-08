@@ -1,0 +1,65 @@
+﻿@model ComputerManager.Models.manager
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>manager</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.mname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.mpass)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mpass)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.power)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.power)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.mstate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mstate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.sex)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.sex)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ComputerManagerDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="ComputerManagerDBEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="computer" EntityType="ComputerManagerDBModel.computer" />
+    <EntitySet Name="login" EntityType="ComputerManagerDBModel.login" />
+    <EntitySet Name="manager" EntityType="ComputerManagerDBModel.manager" />
+    <EntitySet Name="ordercompuer" EntityType="ComputerManagerDBModel.ordercompuer" />
+    <EntitySet Name="sofware" EntityType="ComputerManagerDBModel.sofware" />
+    <EntitySet Name="student" EntityType="ComputerManagerDBModel.student" />
+    <AssociationSet Name="FK_student_student" Association="ComputerManagerDBModel.FK_student_student">
+      <End Role="student" EntitySet="student" />
+      <End Role="student1" EntitySet="student" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="computer">
+    <Key>
+      <PropertyRef Name="comcode" />
+    </Key>
+    <Property Name="room" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="comcode" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="cstate" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+  </EntityType>
+  <EntityType Name="login">
+    <Key>
+      <PropertyRef Name="username" />
+    </Key>
+    <Property Name="username" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="password" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="power" Type="Int16" />
+    <Property Name="state" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+  </EntityType>
+  <EntityType Name="manager">
+    <Key>
+      <PropertyRef Name="mid" />
+    </Key>
+    <Property Name="mid" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="mname" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="mpass" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="power" Type="Int16" />
+    <Property Name="mstate" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="sex" Type="String" Nullable="false" MaxLength="2" FixedLength="true" Unicode="false" />
+  </EntityType>
+  <EntityType Name="ordercompuer">
+    <Key>
+      <PropertyRef Name="sid" />
+    </Key>
+    <Property Name="ocode" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="sid" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="comcode" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="Start_Date" Type="DateTime" Precision="3" />
+    <Property Name="End_Date" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="sofware">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="comcode" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="software" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="student">
+    <Key>
+      <PropertyRef Name="sid" />
+    </Key>
+    <Property Name="sid" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="spass" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="power" Type="Int16" />
+    <Property Name="sstate" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="sname" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="sclass" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="sex" Type="String" Nullable="false" MaxLength="2" FixedLength="true" Unicode="false" />
+    <Property Name="stele" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="student1" Relationship="ComputerManagerDBModel.FK_student_student" FromRole="student" ToRole="student1" />
+    <NavigationProperty Name="student2" Relationship="ComputerManagerDBModel.FK_student_student" FromRole="student1" ToRole="student" />
+  </EntityType>
+  <Association Name="FK_student_student">
+    <End Type="ComputerManagerDBModel.student" Role="student" Multiplicity="1" />
+    <End Type="ComputerManagerDBModel.student" Role="student1" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="student">
+        <PropertyRef Name="sid" />
+      </Principal>
+      <Dependent Role="student1">
+        <PropertyRef Name="sid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

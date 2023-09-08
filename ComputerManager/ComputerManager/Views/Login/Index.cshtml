@@ -1,0 +1,99 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="/Content/lib/html5.js"></script>
+    <script type="text/javascript" src="/Content/lib/respond.min.js"></script>
+    <![endif]-->
+    <link href="/Content/static/h-ui/css/H-ui.min.css" rel="stylesheet" type="text/css" />
+    <link href="/Content/static/h-ui.admin/css/H-ui.login.css" rel="stylesheet" type="text/css" />
+    <link href="/Content/static/h-ui.admin/css/style.css" rel="stylesheet" type="text/css" />
+    <link href="/Content/lib/Hui-iconfont/1.0.8/iconfont.css" rel="stylesheet" type="text/css" />
+    <!--[if IE 6]>
+    <script type="text/javascript" src="http://lib.h-ui.net/DD_belatedPNG_0.0.8a-min.js" ></script>
+    <script>DD_belatedPNG.fix('*');</script><![endif]-->
+    <title>计算机房管理系统</title>
+    <meta name="keywords" content="计算机房管理系统">
+    <meta name="description" content="计算机房管理系统">
+</head>
+<body>
+    <input type="hidden" id="TenantId" name="TenantId" value="" />
+    <div class="loginWraper">
+        <div id="loginform" class="loginBox">
+            <h3 align="center" style="color:papayawhip ; font-size:50px">计算机房管理系统</h3>
+            @*表单的方式提交内容到后端使用*@
+            <form class="form form-horizontal" id="myForm" action="/Login/DoLogin" method="post">
+                <div class="row cl">
+                    <label class="form-label col-xs-3"><i class="Hui-iconfont">&#xe60d;</i></label>
+                    <div class="formControls col-xs-8">
+                        <input id="username" name="username" type="text" placeholder="学号/管理员号" class="input-text size-L">
+                    </div>
+                </div>
+                <div class="row cl">
+                    <label class="form-label col-xs-3"><i class="Hui-iconfont">&#xe60e;</i></label>
+                    <div class="formControls col-xs-8">
+                        <input id="pwd" name="password" type="password" placeholder="密码" class="input-text size-L">
+                    </div>
+                </div>
+
+                <div class="row cl">
+                    <div class="formControls col-xs-8 col-xs-offset-3">
+                        <label for="online">
+                            <input type="radio" name="power" checked id="online" value="0">
+                            学生
+                        </label>
+                        <label for="online2">
+                            <input type="radio" name="power" id="online2" value="1">
+                            管理员
+                        </label>
+                    </div>
+                </div>
+                <div class="row cl">
+                    <div class="formControls col-xs-8 col-xs-offset-3">
+                        <input name="" type="button" id="sub" class="btn btn-success radius size-L" value="&nbsp;登&nbsp;&nbsp;&nbsp;&nbsp;录&nbsp;">
+                        <input name="" style=" margin-left:30px;" type="reset" class="btn btn-default radius size-L" value="&nbsp;取&nbsp;&nbsp;&nbsp;&nbsp;消&nbsp;">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="footer">Copyright 计算机房管理系统 by 王学荣、任佳慧、杨珂</div>
+
+    <script type="text/javascript" src="/Content/lib/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/Content/static/h-ui/js/H-ui.js"></script>
+    <script>
+        $("#sub").click(function () {
+            //1、获取用户名
+            var user = $("#username").val();
+            //2、获取密码
+            var pwd = $("#pwd").val();
+            //3、判断用户名和密码不能为空
+            if (user.length < 1) {
+                alert("请输入用户名！");
+                $("#username").focus();//表单聚焦功能
+                return;//避免往后执行
+            }
+            if (pwd.length < 1) {
+                alert("请输入密码！");
+                $("#pwd").focus();
+                return;//避免往后执行
+            }
+            if (pwd.length < 6 && pwd.length > 1) {
+                alert("密码长度不小于6！");
+                $("#pwd").focus();
+                return;//避免往后执行
+            }
+            //让表单执行提交
+            $("#myForm").submit();
+        });
+    </script>
+</body>
+</html>

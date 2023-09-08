@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ComputerManagerDBModelStoreContainer" CdmEntityContainer="ComputerManagerDBEntities1">
+    <EntitySetMapping Name="computer">
+      <EntityTypeMapping TypeName="ComputerManagerDBModel.computer">
+        <MappingFragment StoreEntitySet="computer">
+          <ScalarProperty Name="cstate" ColumnName="cstate" />
+          <ScalarProperty Name="comcode" ColumnName="comcode" />
+          <ScalarProperty Name="room" ColumnName="room" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="login">
+      <EntityTypeMapping TypeName="ComputerManagerDBModel.login">
+        <MappingFragment StoreEntitySet="login">
+          <ScalarProperty Name="state" ColumnName="state" />
+          <ScalarProperty Name="power" ColumnName="power" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="username" ColumnName="username" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="manager">
+      <EntityTypeMapping TypeName="ComputerManagerDBModel.manager">
+        <MappingFragment StoreEntitySet="manager">
+          <ScalarProperty Name="sex" ColumnName="sex" />
+          <ScalarProperty Name="mstate" ColumnName="mstate" />
+          <ScalarProperty Name="power" ColumnName="power" />
+          <ScalarProperty Name="mpass" ColumnName="mpass" />
+          <ScalarProperty Name="mname" ColumnName="mname" />
+          <ScalarProperty Name="mid" ColumnName="mid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ordercompuer">
+      <EntityTypeMapping TypeName="ComputerManagerDBModel.ordercompuer">
+        <MappingFragment StoreEntitySet="ordercompuer">
+          <ScalarProperty Name="End_Date" ColumnName="End_Date" />
+          <ScalarProperty Name="Start_Date" ColumnName="Start_Date" />
+          <ScalarProperty Name="comcode" ColumnName="comcode" />
+          <ScalarProperty Name="sid" ColumnName="sid" />
+          <ScalarProperty Name="ocode" ColumnName="ocode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sofware">
+      <EntityTypeMapping TypeName="ComputerManagerDBModel.sofware">
+        <MappingFragment StoreEntitySet="sofware">
+          <ScalarProperty Name="software" ColumnName="software" />
+          <ScalarProperty Name="comcode" ColumnName="comcode" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="student">
+      <EntityTypeMapping TypeName="ComputerManagerDBModel.student">
+        <MappingFragment StoreEntitySet="student">
+          <ScalarProperty Name="stele" ColumnName="stele" />
+          <ScalarProperty Name="sex" ColumnName="sex" />
+          <ScalarProperty Name="sclass" ColumnName="sclass" />
+          <ScalarProperty Name="sname" ColumnName="sname" />
+          <ScalarProperty Name="sstate" ColumnName="sstate" />
+          <ScalarProperty Name="power" ColumnName="power" />
+          <ScalarProperty Name="spass" ColumnName="spass" />
+          <ScalarProperty Name="sid" ColumnName="sid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,189 @@
+﻿@model ComputerManager.Models.student
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using ComputerManager.Models
+
+<article class="cl pd-20">
+    <form action="@Url.Action("Save")" method="post" class="form form-horizontal" id="form-member-add" style="margin-top:40px;margin-left:20px;">
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>学生学号：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                @{
+                    if (Model == null)
+                    {
+
+
+                        <input type="text" class="input-text" value="" placeholder="学生学号" id="sid" name="sid">
+                    }
+                    else
+                    {
+                        <input type="text" class="input-text" value="@Model.sid" placeholder="学生学号" readonly="readonly" id="sid" name="sid">
+                    }
+                }
+            </div>
+        </div>
+
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>学生姓名：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="" placeholder="学生姓名" id="sname" name="sname">
+            </div>
+        </div>
+
+
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>学生密码：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="" placeholder="学生密码" id="spass" name="spass">
+            </div>
+        </div>
+
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>学生班级：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="" placeholder="学生班级" id="sclass" name="sclass">
+            </div>
+        </div>
+
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>学生性别：</label>
+            <div class="formControls col-xs-8 col-sm-9 skin-minimal">
+                <div class="radio-box">
+                    <input name="sex" type="radio" id="sex-1" value="男" checked>
+                    <label for="sex-1">男</label>
+                </div>
+                <div class="radio-box">
+                    <input type="radio" id="sex-2" value="女" name="sex">
+                    <label for="sex-2">女</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>学生状态：</label>
+            <div class="formControls col-xs-8 col-sm-9 skin-minimal">
+                <div class="radio-box">
+                    <input name="sstate" type="radio" id="sstate-1" value="0" checked>
+                    <label for="sstate-1">可用</label>
+                </div>
+                <div class="radio-box">
+                    <input type="radio" id="sstate-2" value="1" name="sstate">
+                    <label for="sstate-2">禁用</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>学生权限：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="0" placeholder="学生权限" id="power" name="power" readonly>
+            </div>
+        </div>
+
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>联系方式：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="" placeholder="联系方式" id="stele" name="stele">
+            </div>
+        </div>
+
+
+        <div class="row cl">
+            <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+                <input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+            </div>
+        </div>
+    </form>
+</article>
+
+<script type="text/javascript">
+    $(function () {
+        $('.skin-minimal input').iCheck({
+            checkboxClass: 'icheckbox-blue',
+            radioClass: 'iradio-blue',
+            increaseArea: '20%'
+        });
+
+        $("#form-member-add").validate({
+            rules: {
+                sid: {
+                    required: true,
+                    minlength: 2,
+                    maxlength: 16
+                },
+                sname: {
+                    required: true,
+                    minlength: 2,
+                    maxlength: 16
+                },
+                spass: {
+                    required: true,
+                    minlength: 6,
+                    maxlength: 16
+                },
+                sclass: {
+                    required: true,
+                    minlength: 2,
+                    maxlength: 16
+                },
+                sex: {
+                    required: true,
+                },
+                sstate: {
+                    requires:true,
+                },
+                stele: {
+                    required: true,
+                    length:11
+                },
+                power: {
+                    required:true,
+                },
+            },
+            onkeyup: false,
+            focusCleanup: true,
+            success: "valid",
+            submitHandler: function (form) {
+                var sid = $("sid").val();
+                var sname = $("sname").val();
+                var sstate = $("input[name='sstate']:checked").val();
+                var spass = $("spass").val();
+                var sclass = $("sclass").val();
+                var sex = $("input[name='sex']:checked").val();
+                var stele = $("stele").val();
+                var power = $("power").val();
+
+                $(form).ajaxSubmit({
+                    url: '@Url.Action("Save","Students")',
+                    type: 'POST',
+                    data: {
+                        sid:sid,
+                        sname: sname,
+                        sstate: sstate,
+                        spass: spass,
+                        sclass: sclass,
+                        sex: sex,
+                        stele: stele,
+                        power: power
+                    },
+                    success: function (result) {
+                        if (result.success) {
+                            layer.msg('保存成功!',{ icon: 1, time: 1000 }, function () {
+                                window.location.href = '@Url.Action("Edit","Students")';
+                            });
+                        } else {
+                            layer.msg('保存失败！',{ icon: 2, time: 1000 });
+                        }
+                    },
+                    error: function () {
+                        layer.msg('请求出错', { icon: 2, time: 1000 });
+                    }
+                });
+            }
+        });
+    });
+
+</script>

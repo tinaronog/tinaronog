@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ComputerManagerDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="computer">
+    <Key>
+      <PropertyRef Name="comcode" />
+    </Key>
+    <Property Name="room" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="comcode" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="cstate" Type="nchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="login">
+    <Key>
+      <PropertyRef Name="username" />
+    </Key>
+    <Property Name="username" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="password" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="power" Type="smallint" />
+    <Property Name="state" Type="nchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="manager">
+    <Key>
+      <PropertyRef Name="mid" />
+    </Key>
+    <Property Name="mid" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="mname" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="mpass" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="power" Type="smallint" />
+    <Property Name="mstate" Type="nchar" MaxLength="10" />
+    <Property Name="sex" Type="char" MaxLength="2" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ordercompuer">
+    <Key>
+      <PropertyRef Name="sid" />
+    </Key>
+    <Property Name="ocode" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="sid" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="comcode" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="Start_Date" Type="datetime" />
+    <Property Name="End_Date" Type="datetime" />
+  </EntityType>
+  <EntityType Name="sofware">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="comcode" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="software" Type="varchar" MaxLength="30" Nullable="false" />
+  </EntityType>
+  <EntityType Name="student">
+    <Key>
+      <PropertyRef Name="sid" />
+    </Key>
+    <Property Name="sid" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="spass" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="power" Type="smallint" />
+    <Property Name="sstate" Type="nchar" MaxLength="10" />
+    <Property Name="sname" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="sclass" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="sex" Type="char" MaxLength="2" Nullable="false" />
+    <Property Name="stele" Type="varchar" MaxLength="30" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_student_student">
+    <End Role="student" Type="Self.student" Multiplicity="1" />
+    <End Role="student1" Type="Self.student" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="student">
+        <PropertyRef Name="sid" />
+      </Principal>
+      <Dependent Role="student1">
+        <PropertyRef Name="sid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ComputerManagerDBModelStoreContainer">
+    <EntitySet Name="computer" EntityType="Self.computer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="login" EntityType="Self.login" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="manager" EntityType="Self.manager" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ordercompuer" EntityType="Self.ordercompuer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sofware" EntityType="Self.sofware" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="student" EntityType="Self.student" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_student_student" Association="Self.FK_student_student">
+      <End Role="student" EntitySet="student" />
+      <End Role="student1" EntitySet="student" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,75 @@
+﻿@model ComputerManager.Models.student
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>student</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.spass)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.spass)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.power)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.power)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.sstate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.sstate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.sname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.sname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.sclass)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.sclass)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.sex)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.sex)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.stele)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.stele)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.sid }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

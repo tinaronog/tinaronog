@@ -1,0 +1,24 @@
+﻿@using ComputerManager.Models;
+@{
+    ViewBag.Title = "计算机房管理系统后台首页";
+}
+<section class="Hui-article-box">
+    <nav class="breadcrumb">
+        <i class="Hui-iconfont"></i> <a href="/" class="maincolor">首页</a>
+        <span class="c-999 en">&gt;</span>
+        <span class="c-666">我的桌面</span>
+        <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新"><i class="Hui-iconfont">&#xe68f;</i></a>
+    </nav>
+    <div class="Hui-article">
+        <article class="cl pd-20">
+            <h2 align="center">
+                欢迎使用计算机房管理系统，当前的用户号是：@((Session ["info"] as login).username)
+            </h2>
+            <p align="center">当前时间是：@DateTime.Now.ToString()</p>
+
+        </article>
+        <footer class="footer">
+            <p>王学荣小组 课程设计</p>
+        </footer>
+    </div>
+</section>
